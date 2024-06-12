@@ -1,4 +1,4 @@
-package computer.livingroom.pausegame.networking;
+package computer.livingroom.pausegame.network;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -10,12 +10,11 @@ public record PausePayload(boolean paused) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, PausePayload> CODEC = CustomPacketPayload.codec(PausePayload::write, PausePayload::new);
     public static final CustomPacketPayload.Type<PausePayload> resource = new Type<>(new ResourceLocation("pausegame", "sync"));
 
-    public PausePayload(RegistryFriendlyByteBuf buf)
-    {
+    public PausePayload(RegistryFriendlyByteBuf buf) {
         this(buf.readBoolean());
     }
-    public void write(RegistryFriendlyByteBuf buf)
-    {
+
+    public void write(RegistryFriendlyByteBuf buf) {
         buf.writeBoolean(paused);
     }
 

@@ -1,4 +1,4 @@
-package computer.livingroom.pausegame.networking;
+package computer.livingroom.pausegame.network;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
