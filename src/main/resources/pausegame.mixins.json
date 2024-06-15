@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "computer.livingroom.pausegame.server.mixins",
+  "compatibilityLevel": "JAVA_21",
+  "server": [
+    "ServerGamePacketMixin",
+    "ServerPlayerMixin",
+    "EntityMixin",
+    "LivingEntityMixin",
+    "PlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
+

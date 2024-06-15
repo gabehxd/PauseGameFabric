@@ -12,15 +12,21 @@
   },
   "license": "MIT",
   "icon": "assets/pausegame/icon.png",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
     "main": [
       "computer.livingroom.pausegame.PauseGame"
     ],
     "client": [
       "computer.livingroom.pausegame.client.PauseGameClient"
+    ],
+    "server": [
+      "computer.livingroom.pausegame.server.PauseGameServer"
     ]
   },
+  "mixins": [
+    "pausegame.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
