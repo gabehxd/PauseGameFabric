@@ -10,17 +10,17 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.TickRateManager;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 
 import static computer.livingroom.pausegame.PauseGame.LOGGER;
 
 public class ModCompanionEvents {
-    public static ArrayList<ServerPlayer> frozenPlayers = new ArrayList<>();
+    public static ArrayList<Player> frozenPlayers = new ArrayList<>();
 
     public static void init() {
         LOGGER.info("Registering mod support...");
