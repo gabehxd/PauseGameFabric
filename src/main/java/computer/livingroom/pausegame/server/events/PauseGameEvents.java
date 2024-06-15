@@ -1,6 +1,7 @@
 package computer.livingroom.pausegame.server.events;
 
 import computer.livingroom.pausegame.server.FreezeUtils;
+import computer.livingroom.pausegame.server.PauseGameServer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.world.TickRateManager;
@@ -30,8 +31,7 @@ public class PauseGameEvents {
             TickRateManager tickManager = server.tickRateManager();
 
             if (tickManager.isFrozen()) {
-                //TODO: config
-                tickManager.setFrozenTicksToRun(1);
+                tickManager.setFrozenTicksToRun(PauseGameServer.settings.getSteps());
                 return;
             }
 
