@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public record PausePayload(boolean paused) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, PausePayload> CODEC = CustomPacketPayload.codec(PausePayload::write, PausePayload::new);
-    public static final CustomPacketPayload.Type<PausePayload> resource = new Type<>(new ResourceLocation("pausegame", "sync"));
+    public static final CustomPacketPayload.Type<PausePayload> resource = new Type<>(ResourceLocation.tryBuild("pausegame", "sync"));
 
     public PausePayload(RegistryFriendlyByteBuf buf) {
         this(buf.readBoolean());
