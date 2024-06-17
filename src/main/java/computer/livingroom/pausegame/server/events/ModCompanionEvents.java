@@ -4,6 +4,7 @@ import computer.livingroom.pausegame.network.PausePayload;
 import computer.livingroom.pausegame.network.SupportPayload;
 import computer.livingroom.pausegame.server.FreezeUtils;
 import computer.livingroom.pausegame.server.PauseGameServer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
@@ -56,6 +57,8 @@ public class ModCompanionEvents {
 
             return !frozenPlayers.contains(player);
         });
+
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> !entity.getServer().tickRateManager().isFrozen() || !PauseGameServer.settings.enableModSupport());
 
 
         ServerPlayNetworking.registerGlobalReceiver(PausePayload.resource, (payload, context) -> {

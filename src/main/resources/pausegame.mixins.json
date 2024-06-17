@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_21",
   "server": [
     "ServerGamePacketMixin",
-    "ServerPlayerMixin",
     "EntityMixin",
     "LivingEntityMixin",
     "PlayerMixin"
