@@ -21,19 +21,19 @@ public class PauseGameClient implements ClientModInitializer {
             PauseGame.LOGGER.info("Support is enabled on this server!");
         });
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
-            PauseGame.LOGGER.info("Joined server");
+            PauseGame.LOGGER.debug("Joined server");
             if (client.getConnection() != null && client.getConnection().getServerData() != null)
                 if (!client.getConnection().getServerData().isRealm() && !client.getConnection().getServerData().isLan() && !client.isLocalServer())
                     connectedToServer = true;
         });
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            PauseGame.LOGGER.info("Left server");
+            PauseGame.LOGGER.debug("Left server");
             if (client.getConnection() != null && client.getConnection().getServerData() != null)
                 if (!client.getConnection().getServerData().isRealm() && !client.getConnection().getServerData().isLan() && !client.isLocalServer()) {
                     connectedToServer = false;
                     isSupportedOnServer = false;
                     isPaused = false;
-                    PauseGame.LOGGER.info("Resetting state");
+                    PauseGame.LOGGER.debug("Resetting state");
                 }
         });
 
