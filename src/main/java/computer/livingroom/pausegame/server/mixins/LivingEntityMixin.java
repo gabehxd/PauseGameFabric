@@ -16,12 +16,12 @@ public abstract class LivingEntityMixin extends Entity {
         super(entityType, level);
     }
 
-    @Inject(method = "heal",
-    at = @At("HEAD"),
-    cancellable = true
+    @Inject(
+            method = "heal",
+            at = @At("HEAD"),
+            cancellable = true
     )
-    private void cancelHealing(float healAmount, CallbackInfo ci)
-    {
+    private void cancelHealing(float healAmount, CallbackInfo ci) {
         if (this.getServer().tickRateManager().isFrozen() && PauseGameServer.settings.enableModSupport())
             ci.cancel();
     }

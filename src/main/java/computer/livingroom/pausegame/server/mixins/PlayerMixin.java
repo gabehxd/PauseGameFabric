@@ -21,8 +21,7 @@ public abstract class PlayerMixin extends Entity {
             at = @At(value = "HEAD"),
             cancellable = true
     )
-    public void preventFoodExhaustion(float exhaustion, CallbackInfo ci)
-    {
+    public void preventFoodExhaustion(float exhaustion, CallbackInfo ci) {
         if (this.getServer().tickRateManager().isFrozen() && PauseGameServer.settings.enableModSupport())
             ci.cancel();
     }
