@@ -59,7 +59,6 @@ public class ModCompanionEvents {
         });
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> !entity.getServer().tickRateManager().isFrozen() || !PauseGameServer.settings.enableModSupport());
 
-
         ServerPlayNetworking.registerGlobalReceiver(PausePayload.resource, (payload, context) -> {
             MinecraftServer server = context.player().server;
             if (payload.paused()) {

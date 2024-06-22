@@ -29,13 +29,12 @@ public abstract class EntityMixin {
 
     @ModifyArg(
             method = "applyGravity",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0)
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V")
     )
     private Vec3 setVelocity(Vec3 original) {
-        if ((this.getServer().tickRateManager().isFrozen() && PauseGameServer.settings.enableModSupport() && ((Object) this) instanceof Minecart minecart && minecart.hasExactlyOnePlayerPassenger())) {
+        if ((this.getServer().tickRateManager().isFrozen() && PauseGameServer.settings.enableModSupport()) && ((Object) this) instanceof Minecart minecart && minecart.hasExactlyOnePlayerPassenger()) {
             return new Vec3(0, 0, 0);
-        } else {
-            return original;
         }
+        return original;
     }
 }
