@@ -5,23 +5,14 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.TickRateManager;
 
 public class FreezeUtils {
-    public static void freezeGameWithStep(MinecraftServer server) {
-        freezeGame(server, true);
-    }
-
-    public static void freezeGameNoStep(MinecraftServer server) {
-        freezeGame(server, false);
-    }
-
-    private static void freezeGame(MinecraftServer server, boolean step) {
-        TickRateManager manager = server.tickRateManager();
-
-        if (PauseGameServer.settings.shouldSaveGame())
-            server.saveEverything(false, false, false);
+    public static void freezeGame(MinecraftServer server, boolean isQuit) {
+        if (isQuit && PauseGameServer.settings.shouldSaveGame()) {
+            //this should unload everything for us
+            server.saveEverything(false, true, false);
+        }
 
         PauseGame.LOGGER.info("Pausing game...");
+        TickRateManager manager = server.tickRateManager();
         manager.setFrozen(true);
-        if (step)
-            manager.setFrozenTicksToRun(PauseGameServer.settings.getSteps());
     }
 }

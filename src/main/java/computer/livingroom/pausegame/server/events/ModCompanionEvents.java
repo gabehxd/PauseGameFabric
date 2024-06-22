@@ -57,7 +57,6 @@ public class ModCompanionEvents {
 
             return !frozenPlayers.contains(player);
         });
-
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> !entity.getServer().tickRateManager().isFrozen() || !PauseGameServer.settings.enableModSupport());
 
 
@@ -66,7 +65,7 @@ public class ModCompanionEvents {
             if (payload.paused()) {
                 frozenPlayers.add(context.player());
                 if (server.getPlayerList().getPlayerCount() == frozenPlayers.size()) {
-                    FreezeUtils.freezeGameNoStep(server);
+                    FreezeUtils.freezeGame(server, false);
                 }
             } else {
                 frozenPlayers.remove(context.player());

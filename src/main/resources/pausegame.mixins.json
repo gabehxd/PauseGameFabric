@@ -4,10 +4,11 @@
   "package": "computer.livingroom.pausegame.server.mixins",
   "compatibilityLevel": "JAVA_21",
   "server": [
-    "ServerGamePacketMixin",
     "EntityMixin",
     "LivingEntityMixin",
-    "PlayerMixin"
+    "MinecraftServerMixin",
+    "PlayerMixin",
+    "ServerGamePacketMixin"
   ],
   "injectors": {
     "defaultRequire": 1

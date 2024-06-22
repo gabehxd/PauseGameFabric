@@ -22,19 +22,8 @@ public class PauseGameServer implements DedicatedServerModInitializer {
     }
 
     public static class Settings {
-        public int getSteps() {
-            int ticks = config.getOrDefault("task-delay-in-ticks", -1);
-            if (ticks < 0) {
-                ticks = config.getOrDefault("step-ticks", 1);
-                if (ticks < 0) {
-                    return 0;
-                }
-            }
-            return ticks;
-        }
-
         public boolean shouldSaveGame() {
-            return config.getOrDefault("save-game", false);
+            return config.getOrDefault("save-game-on-quit", true);
         }
 
         public boolean enableModSupport() {
@@ -44,11 +33,8 @@ public class PauseGameServer implements DedicatedServerModInitializer {
 
     private static String defaultConfig(String filename) {
         return """
-                #Whether to save the game when the server pauses, usually fine without saving.
-                save-game: false
-
-                #How many ticks to step after the server has been paused. After 1 tick the server will usually unload chunks and save them.
-                step-ticks: 1
+                #Whether to save and unloads chunks when all players have left the server
+                save-game-on-quit: true
 
                 #Whether to let clients let the server know they are in the pause menu
                 enable-mod-companion: true
