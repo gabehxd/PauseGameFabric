@@ -1,13 +1,11 @@
 package computer.livingroom.pausegame.server.mixins;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.sugar.Local;
 import computer.livingroom.pausegame.server.PauseGameServer;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
 import net.minecraft.network.protocol.game.ServerboundMoveVehiclePacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
-import net.minecraft.world.entity.Entity;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -86,7 +84,7 @@ public abstract class ServerGamePacketMixin {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;serverLevel()Lnet/minecraft/server/level/ServerLevel;", ordinal = 1, shift = At.Shift.BEFORE),
             cancellable = true
     )
-    private void preventVehicleMove(ServerboundMoveVehiclePacket packet, CallbackInfo ci, @Local Entity entity) {
+    private void preventVehicleMove(ServerboundMoveVehiclePacket packet, CallbackInfo ci) {
         if (player.server.tickRateManager().isFrozen() && PauseGameServer.settings.enableModSupport()) {
             this.teleport(prevX, prevY, prevZ, prevYaw, prevPitch);
             ci.cancel();
