@@ -1,6 +1,5 @@
 package computer.livingroom.pausegame.server.events;
 
-import computer.livingroom.pausegame.PauseGame;
 import computer.livingroom.pausegame.network.PausePayload;
 import computer.livingroom.pausegame.network.SupportPayload;
 import computer.livingroom.pausegame.server.FreezeUtils;
