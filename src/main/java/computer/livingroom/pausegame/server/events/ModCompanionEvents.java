@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import static computer.livingroom.pausegame.PauseGame.LOGGER;
 
 public class ModCompanionEvents {
-    public static ArrayList<Player> frozenPlayers = new ArrayList<>();
+    public static ArrayList<Player> frozenPlayers = new ArrayList<>(1);
 
     public static void init() {
         LOGGER.info("Registering mod support...");
