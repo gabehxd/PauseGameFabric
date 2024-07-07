@@ -1,5 +1,6 @@
 package computer.livingroom.pausegame.server.events;
 
+import computer.livingroom.pausegame.PauseGame;
 import computer.livingroom.pausegame.network.PausePayload;
 import computer.livingroom.pausegame.network.SupportPayload;
 import computer.livingroom.pausegame.server.FreezeUtils;
@@ -15,13 +16,16 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static computer.livingroom.pausegame.PauseGame.LOGGER;
 
 public class ModCompanionEvents {
     public static ArrayList<Player> frozenPlayers = new ArrayList<>(1);
+    public static HashMap<Player, Vec3> velocity = new HashMap<>(1);
 
     public static void init() {
         LOGGER.info("Registering mod support...");
@@ -64,6 +68,11 @@ public class ModCompanionEvents {
             if (payload.paused()) {
                 frozenPlayers.add(context.player());
                 if (server.getPlayerList().getPlayerCount() == frozenPlayers.size()) {
+                    server.getPlayerList().getPlayers().forEach(serverPlayer -> {
+                        LOGGER.info(serverPlayer.getDeltaMovement().toString());
+                        velocity.put(serverPlayer, serverPlayer.getDeltaMovement());
+                    });
+
                     FreezeUtils.freezeGame(server, false);
                 }
             } else {
@@ -73,6 +82,12 @@ public class ModCompanionEvents {
                     LOGGER.info("Unpausing game...");
                     tickManager.setFrozen(false);
                 }
+                server.getPlayerList().getPlayers().forEach(serverPlayer -> {
+                    LOGGER.info(velocity.get(serverPlayer).toString());
+                    serverPlayer.setDeltaMovement(velocity.get(serverPlayer));
+                    //Don't ask me why, this is just how you sync velocity
+                    serverPlayer.hurtMarked = true;
+                });
             }
         });
     }
