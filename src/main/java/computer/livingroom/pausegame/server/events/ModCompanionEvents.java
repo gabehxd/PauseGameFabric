@@ -83,10 +83,13 @@ public class ModCompanionEvents {
                 }
                 server.getPlayerList().getPlayers().forEach(serverPlayer -> {
                     LOGGER.info(velocity.get(serverPlayer).toString());
-                    serverPlayer.setDeltaMovement(velocity.get(serverPlayer));
+                    Vec3 vel = velocity.get(serverPlayer);
+                    if (vel != null)
+                        serverPlayer.setDeltaMovement(vel);
                     //Don't ask me why, this is just how you sync velocity
                     serverPlayer.hurtMarked = true;
                 });
+                velocity.clear();
             }
         });
     }
