@@ -17,13 +17,13 @@ import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import static computer.livingroom.pausegame.PauseGame.LOGGER;
 
 public class ModCompanionEvents {
-    public static ArrayList<Player> frozenPlayers = new ArrayList<>(1);
+    public static HashSet<Player> frozenPlayers = new HashSet<>(1);
     public static HashMap<Player, Vec3> velocity = new HashMap<>(1);
 
     public static void init() {
