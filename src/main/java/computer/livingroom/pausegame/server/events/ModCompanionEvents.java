@@ -12,7 +12,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -47,12 +46,12 @@ public class ModCompanionEvents {
         });
         UseItemCallback.EVENT.register((player, world, hand) -> {
             if (!player.getServer().tickRateManager().isFrozen() || !PauseGameServer.settings.enableModSupport())
-                return InteractionResultHolder.pass(player.getItemInHand(hand));
+                return InteractionResult.PASS;
 
             if (frozenPlayers.contains(player))
-                return InteractionResultHolder.fail(player.getItemInHand(hand));
+                return InteractionResult.FAIL;
 
-            return InteractionResultHolder.pass(player.getItemInHand(hand));
+            return InteractionResult.PASS;
         });
         PlayerBlockBreakEvents.BEFORE.register((world, player, pos, state, blockEntity) -> {
             if (!player.getServer().tickRateManager().isFrozen() || !PauseGameServer.settings.enableModSupport())
